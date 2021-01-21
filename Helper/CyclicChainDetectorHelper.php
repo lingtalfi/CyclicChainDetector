@@ -25,61 +25,98 @@ class CyclicChainDetectorHelper
 
         $br = (true === CurrentProcessTool::isCli()) ? PHP_EOL : '<br>';
 
-        echo "----" . $br;
+        echo "*****" . $br;
 
 
         $links = $util->getLinks();
         foreach ($links as $link) {
-
-            echo $link->start;
-            echo " -> ";
-            echo $link->end;
-
-            while (null !== ($child = $link->getChild())) {
-                $link = $child;
-                echo " -> ";
-                echo $link->end;
-            }
-
-            echo $br;
+            self::debugLink($link, 0, $br);
         }
     }
 
 
     /**
-     * Returns all link's members, ordered by decreasing age (i.e. oldest first).
+     *
+     * Prints a human readable version of the given link.
+     *
+     *
+     * @param Link $link
+     * @param int $indent
+     * @param string $br
+     */
+    private static function debugLink(Link $link, int $indent = 0, string $br = PHP_EOL)
+    {
+
+        echo str_repeat("----", $indent) . ' ';
+        echo $link->name . $br;
+
+        $deps = $link->getDependencies();
+        if ($deps) {
+            $indent++;
+            foreach ($deps as $dep) {
+                self::debugLink($dep, $indent, $br);
+            }
+        }
+    }
+
+
+    /**
+     * Returns the source names, recursively, from the given link up to the original link.
+     *
+     * This method returns an array of links name.
      *
      * @param Link $link
      * @return array
      */
-    public static function linkAsArray(Link $link): array
+    public static function getSourceNamesByLink(Link $link): array
     {
         $ret = [];
-        $ret[] = $link->start;
-        $ret[] = $link->end;
-        while (null !== ($child = $link->getChild())) {
-            $link = $child;
-            $ret[] = $link->end;
+        while (null !== ($source = $link->getSource())) {
+            $link = $source;
+            $ret[] = $link->name;
         }
         return $ret;
     }
 
 
     /**
-     * Returns an array of all chain's members, grouped by links, and ordered by decreasing age (i.e. oldest first).
-     * It's an array of linkItem (one for each link of the chain), each of which is an array being the result of the linkAsArray method.
+     * Returns a human readable version of the chain the given link was found in, from the source down to the link (but not further down).
      *
+     * @param Link $link
+     * @return string
      *
-     * @param CyclicChainDetectorUtil $util
-     * @return array
      */
-    public static function chainAsArray(CyclicChainDetectorUtil $util): array
+    public static function getPathAsString(Link $link): string
     {
-        $ret = [];
-        $links = $util->getLinks();
-        foreach ($links as $link) {
-            $ret[] = self::linkAsArray($link);
+        $symbol = ' -> ';
+        $s = '';
+        $sources = self::getSourceNamesByLink($link);
+        $sources = array_reverse($sources);
+        foreach ($sources as $source) {
+            $s .= $source;
+            $s .= $symbol;
         }
-        return $ret;
+        $s .= $link->name;
+        return $s;
     }
+
+
+    /**
+     * Applies the given callable to the given link and every dependency found in it.
+     *
+     * The callable's sole argument is a link.
+     *
+     *
+     * @param Link $link
+     * @param callable $fn
+     */
+    public static function each(Link $link, callable $fn)
+    {
+        call_user_func($fn, $link);
+        $deps = $link->getDependencies();
+        foreach ($deps as $dep) {
+            self::each($dep, $fn);
+        }
+    }
+
 }

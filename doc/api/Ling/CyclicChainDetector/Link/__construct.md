@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [Link::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/__construct.md)(string $start, string $end) : void
+public [Link::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/__construct.md)(string $name) : void
 
 
 
@@ -30,11 +30,7 @@ Parameters
 ================
 
 
-- start
-
-    
-
-- end
+- name
 
     
 
@@ -53,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [Link::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/Link.php#L38-L43)
+See the source code for method [Link::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/Link.php#L43-L48)
 
 
 See Also
@@ -61,5 +57,5 @@ See Also
 
 The [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) class.
 
-Next method: [setChild](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/setChild.md)<br>
+Next method: [addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/addDependency.md)<br>
 

@@ -47,7 +47,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorUtil::checkCyclicRelationship](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L123-L140)
+See the source code for method [CyclicChainDetectorUtil::checkCyclicRelationship](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L149-L162)
 
 
 See Also
@@ -55,5 +55,5 @@ See Also
 
 The [CyclicChainDetectorUtil](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil.md) class.
 
-Previous method: [getLinksByEndNode](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/getLinksByEndNode.md)<br>
+Previous method: [getLinkByName](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/getLinkByName.md)<br>
 

@@ -57,19 +57,43 @@ class CyclicChainDetectorUtil
      */
     public function addDependency(string $child, string $parent)
     {
-        $links = $this->getLinksByEndNode($child);
+        $link = $this->getLinkByName($child);
 
-        if ($links) {
-            foreach ($links as $link) {
-                $link->appendChildByEndNode($parent);
-            }
+        if (null === $link) {
+            $childLink = new Link($child);
+            $parentLink = new Link($parent);
+            $childLink->addDependency($parentLink);
+            $this->links[] = $childLink;
         } else {
-            $link = new Link($child, $parent);
-            $this->links[] = $link;
+//            if (false === $link->hasDependency($parent)) {
+            $parentLink = new Link($parent);
+            $link->addDependency($parentLink);
+//            }
         }
 
 
         $this->checkCyclicRelationship();
+    }
+
+
+    /**
+     * Adds the given dependencies as links.
+     * The dependencies argument is an array of dependencyItems,
+     * each of which being an array with the following structure:
+     *
+     * - 0: child
+     * - 1: parent
+     *
+     *
+     *
+     * @param array $dependencies
+     */
+    public function addDependencies(array $dependencies)
+    {
+        foreach ($dependencies as $dependency) {
+            list($child, $parent) = $dependency;
+            $this->addDependency($child, $parent);
+        }
     }
 
     /**
@@ -97,21 +121,23 @@ class CyclicChainDetectorUtil
     //
     //--------------------------------------------
     /**
-     * Returns the link instances corresponding to the given parent, if it exists, or null otherwise.
-     * @param string $parent
-     * @return Link[]
+     * Returns the link instance corresponding to the given parent, if it exists, or null otherwise.
      *
+     * @param string $name
+     * @return Link|null
      */
-    private function getLinksByEndNode(string $parent): array
+    private function getLinkByName(string $name): ?Link
     {
-        $ret = [];
         foreach ($this->links as $link) {
-            $end = $link->getLastEndNode();
-            if ($parent === $end) {
-                $ret[] = $link;
+            if ($name === $link->name) {
+                return $link;
+            }
+            $childLink = $link->getDependencyByName($name, ['last' => true,]);
+            if (null !== $childLink) {
+                return $childLink;
             }
         }
-        return $ret;
+        return null;
     }
 
 
@@ -122,20 +148,18 @@ class CyclicChainDetectorUtil
      */
     private function checkCyclicRelationship()
     {
-
         foreach ($this->links as $link) {
-            $arr = CyclicChainDetectorHelper::linkAsArray($link);
 
-            $memory = [];
-            while (null !== ($node = array_pop($arr))) {
-                if (false === in_array($node, $memory, true)) {
-                    $memory[] = $node;
-                } else {
+            CyclicChainDetectorHelper::each($link, function ($theLink) {
+                $sources = CyclicChainDetectorHelper::getSourceNamesByLink($theLink);
+                if (true === in_array($theLink->name, $sources, true)) {
                     if (null !== $this->callback) {
-                        call_user_func($this->callback, $link);
+                        call_user_func($this->callback, $theLink);
                     }
                 }
-            }
+            });
         }
     }
+
+
 }

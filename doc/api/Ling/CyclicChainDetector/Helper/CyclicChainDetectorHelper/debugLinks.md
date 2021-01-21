@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorHelper::debugLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/Helper/CyclicChainDetectorHelper.php#L22-L46)
+See the source code for method [CyclicChainDetectorHelper::debugLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/Helper/CyclicChainDetectorHelper.php#L22-L35)
 
 
 See Also
@@ -57,5 +57,5 @@ See Also
 
 The [CyclicChainDetectorHelper](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Helper/CyclicChainDetectorHelper.md) class.
 
-Next method: [linkAsArray](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Helper/CyclicChainDetectorHelper/linkAsArray.md)<br>
+Next method: [debugLink](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Helper/CyclicChainDetectorHelper/debugLink.md)<br>
 

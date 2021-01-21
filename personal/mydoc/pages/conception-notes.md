@@ -31,14 +31,15 @@ Here is my test setup, we can use this as a quickstart:
 
 
 ```php
-
-
 $u = new CyclicChainDetectorUtil();
 $u->setCallback(function (Link $link) {
-    $lastEndNode = $link->getLastEndNode();
-    a("cyclic relationship detected with culprit $lastEndNode, in chain: " . implode(" -> ", CyclicChainDetectorHelper::linkAsArray($link)));
+    $name = $link->name;
+    $s = CyclicChainDetectorHelper::getPathAsString($link);
+    a("cyclic relationship detected with culprit $name, in chain $s.");
 
 });
+
+
 
 
 if (1) {
@@ -150,40 +151,184 @@ if (1) {
 
 }
 
+
+
+
+
+if (1) {
+
+    $u->reset();
+    $u->addDependencies([
+        ['a', 'c'],
+        ['c', 'x'],
+        ['x', 'y'],
+        ['y', 'z'],
+        ['c', 'd'],
+        ['a', 'b'],
+        ['b', 'c'],
+        ['c', 'x'],
+        ['x', 'y'],
+        ['y', 'z'],
+        ['c', 'd'],
+    ]);
+
+    CyclicChainDetectorHelper::debugLinks($u);
+
+
+}
+
+
+
+
+if (1) {
+
+    $u->reset();
+    $u->addDependencies([
+        ['a', 'b'],
+        ['b', 'x'],
+        ['b', 'm'],
+        ['m', 'p'],
+        ['m', 'q'],
+        ['b', 'n'],
+        ['a', 'f'],
+        ['f', 'x'],
+        ['f', 'm'],
+        ['m', 'p'],
+        ['m', 'q'],
+//        ['q', 'f'],
+        ['a', 'g'],
+    ]);
+
+    CyclicChainDetectorHelper::debugLinks($u);
+
+
+}
+
+
+if (1) {
+
+    $u->reset();
+    $u->addDependencies([
+        ['a', 'b'],
+        ['b', 'x'],
+        ['b', 'm'],
+        ['m', 'p'],
+        ['m', 'q'],
+        ['b', 'n'],
+        ['a', 'f'],
+        ['f', 'x'],
+        ['f', 'm'],
+        ['m', 'p'],
+        ['m', 'q'],
+        ['q', 'f'],
+        ['a', 'g'],
+    ]);
+
+    CyclicChainDetectorHelper::debugLinks($u);
+
+
+}
+
+
 ```
 
 
 The code above displayed this in my browser:
 
 ```html
-----
-a -> b -> c
-a -> c
-----
-a -> b -> c
-a -> c
-----
-a -> c
-a -> b -> c
-----
-a -> b -> c -> d
+*****
+a
+---- b
+-------- c
+---- c
+*****
+a
+---- b
+-------- c
+---- c
+*****
+a
+---- c
+---- b
+-------- c
+*****
+a
+---- b
+-------- c
+------------ d
 
-string(71) "cyclic relationship detected with culprit a, in chain: a -> b -> c -> a"
+string(71) "cyclic relationship detected with culprit a, in chain a -> b -> c -> a."
 
-----
-a -> b -> c -> a
-----
-a -> b -> c -> d
-c -> e
-b -> e
+*****
+a
+---- b
+-------- c
+------------ a
+*****
+a
+---- b
+-------- c
+------------ d
+------------ e
+-------- e
 
-string(66) "cyclic relationship detected with culprit b, in chain: b -> e -> b"
+string(71) "cyclic relationship detected with culprit b, in chain a -> b -> e -> b."
 
-----
-a -> b -> c -> d
-c -> e -> b
-b -> e -> b
+*****
+a
+---- b
+-------- c
+------------ d
+------------ e
+-------- e
+------------ b
+*****
+a
+---- c
+-------- x
+------------ y
+---------------- z
+-------- d
+---- b
+-------- c
+------------ x
+---------------- y
+-------------------- z
+------------ d
+*****
+a
+---- b
+-------- x
+-------- m
+------------ p
+------------ q
+-------- n
+---- f
+-------- x
+-------- m
+------------ p
+------------ q
+---- g
 
+string(76) "cyclic relationship detected with culprit f, in chain a -> f -> m -> q -> f."
+
+string(76) "cyclic relationship detected with culprit f, in chain a -> f -> m -> q -> f."
+
+*****
+a
+---- b
+-------- x
+-------- m
+------------ p
+------------ q
+-------- n
+---- f
+-------- x
+-------- m
+------------ p
+------------ q
+---------------- f
+---- g
 
 
 

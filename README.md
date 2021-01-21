@@ -38,6 +38,10 @@ Summary
 History Log
 =============
 
+- 1.1.0 -- 2021-01-21
+
+    - changed api to accommodate my needs
+  
 - 1.0.0 -- 2021-01-21
 
     - initial commit

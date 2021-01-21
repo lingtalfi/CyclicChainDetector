@@ -26,16 +26,17 @@ Class synopsis
 class <span class="pl-k">Link</span>  {
 
 - Properties
-    - public string [$start](#property-start) ;
-    - public string [$end](#property-end) ;
-    - protected [Ling\CyclicChainDetector\Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md)|null [$child](#property-child) ;
+    - public string [$name](#property-name) ;
+    - protected [Ling\CyclicChainDetector\Link[]](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) [$dependencies](#property-dependencies) ;
+    - protected [Ling\CyclicChainDetector\Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md)|null [$source](#property-source) ;
 
 - Methods
-    - public [__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/__construct.md)(string $start, string $end) : void
-    - public [setChild](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/setChild.md)([Ling\CyclicChainDetector\Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) $link) : void
-    - public [getChild](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getChild.md)() : [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) | null
-    - public [appendChildByEndNode](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/appendChildByEndNode.md)(string $end) : void
-    - public [getLastEndNode](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getLastEndNode.md)() : string
+    - public [__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/__construct.md)(string $name) : void
+    - public [addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/addDependency.md)([Ling\CyclicChainDetector\Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) $link) : void
+    - public [getDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getDependencies.md)() : [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md)
+    - public [getSource](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getSource.md)() : [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) | null
+    - public [hasDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/hasDependency.md)(string $name) : bool
+    - public [getDependencyByName](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getDependencyByName.md)(string $name, ?array $options = []) : [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) | null
 
 }
 
@@ -45,21 +46,24 @@ class <span class="pl-k">Link</span>  {
 Properties
 =============
 
-- <span id="property-start"><b>start</b></span>
+- <span id="property-name"><b>name</b></span>
 
-    The name of the start node.
+    The name of the link
     
     
 
-- <span id="property-end"><b>end</b></span>
+- <span id="property-dependencies"><b>dependencies</b></span>
 
-    The name of the end node.
+    The direct dependencies of the link.
+    
+    It's an array of links.
     
     
 
-- <span id="property-child"><b>child</b></span>
+- <span id="property-source"><b>source</b></span>
 
-    The child link, if any.
+    This source of this link instance.
+    This only applies to dependency links (otherwise it's null).
     
     
 
@@ -69,10 +73,11 @@ Methods
 ==============
 
 - [Link::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/__construct.md) &ndash; Builds the Link instance.
-- [Link::setChild](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/setChild.md) &ndash; Sets the child link.
-- [Link::getChild](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getChild.md) &ndash; Returns the child of this instance.
-- [Link::appendChildByEndNode](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/appendChildByEndNode.md) &ndash; Appends a new child link with the given end name.
-- [Link::getLastEndNode](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getLastEndNode.md) &ndash; Returns the last end node name for this link.
+- [Link::addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/addDependency.md) &ndash; Adds the link as a dependency of the current instance.
+- [Link::getDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getDependencies.md) &ndash; Returns the dependencies of this instance.
+- [Link::getSource](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getSource.md) &ndash; Returns the source of this instance.
+- [Link::hasDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/hasDependency.md) &ndash; Returns whether the current link has a direct dependency to the given name.
+- [Link::getDependencyByName](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link/getDependencyByName.md) &ndash; Returns the link dependency with the given name if it exists, or null otherwise.
 
 
 
