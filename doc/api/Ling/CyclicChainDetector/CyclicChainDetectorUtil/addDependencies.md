@@ -54,7 +54,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorUtil::addDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L91-L97)
+See the source code for method [CyclicChainDetectorUtil::addDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L110-L116)
 
 
 See Also

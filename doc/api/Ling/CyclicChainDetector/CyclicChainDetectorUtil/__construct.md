@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorUtil::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L35-L39)
+See the source code for method [CyclicChainDetectorUtil::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L42-L47)
 
 
 See Also

@@ -46,7 +46,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorUtil::reset](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L113-L116)
+See the source code for method [CyclicChainDetectorUtil::reset](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L132-L135)
 
 
 See Also

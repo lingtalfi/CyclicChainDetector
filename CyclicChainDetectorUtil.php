@@ -30,11 +30,19 @@ class CyclicChainDetectorUtil
 
 
     /**
+     * This property holds the cyclicError for this instance.
+     * @var bool = false
+     */
+    protected $cyclicError;
+
+
+    /**
      * Builds the CyclicChainDetectorUtil instance.
      */
     public function __construct()
     {
         $this->callback = null;
+        $this->cyclicError = false;
         $this->links = [];
     }
 
@@ -48,6 +56,16 @@ class CyclicChainDetectorUtil
         $this->callback = $callback;
     }
 
+    /**
+     * Returns the cyclicError of this instance.
+     *
+     * @return bool
+     */
+    public function hasCyclicError(): bool
+    {
+        return $this->cyclicError;
+    }
+
 
     /**
      * Adds a dependency link.
@@ -57,6 +75,9 @@ class CyclicChainDetectorUtil
      */
     public function addDependency(string $child, string $parent)
     {
+        if (true === $this->cyclicError) {
+            return;
+        }
         $link = $this->getLinkByName($child);
 
         if (null === $link) {
@@ -65,14 +86,12 @@ class CyclicChainDetectorUtil
             $childLink->addDependency($parentLink);
             $this->links[] = $childLink;
         } else {
-//            if (false === $link->hasDependency($parent)) {
             $parentLink = new Link($parent);
             $link->addDependency($parentLink);
-//            }
         }
 
-
         $this->checkCyclicRelationship();
+
     }
 
 
@@ -149,15 +168,16 @@ class CyclicChainDetectorUtil
     private function checkCyclicRelationship()
     {
         foreach ($this->links as $link) {
-
-            CyclicChainDetectorHelper::each($link, function ($theLink) {
+            CyclicChainDetectorHelper::each($link, function (Link $theLink) use ($link, &$continue) {
                 $sources = CyclicChainDetectorHelper::getSourceNamesByLink($theLink);
                 if (true === in_array($theLink->name, $sources, true)) {
                     if (null !== $this->callback) {
+                        $this->cyclicError = true;
                         call_user_func($this->callback, $theLink);
                     }
                 }
             });
+
         }
     }
 

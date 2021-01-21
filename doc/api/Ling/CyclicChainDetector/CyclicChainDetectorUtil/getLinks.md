@@ -46,7 +46,7 @@ Returns [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/
 
 Source Code
 ===========
-See the source code for method [CyclicChainDetectorUtil::getLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L104-L107)
+See the source code for method [CyclicChainDetectorUtil::getLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/CyclicChainDetectorUtil.php#L123-L126)
 
 
 See Also

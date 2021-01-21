@@ -11,6 +11,7 @@ Table of contents
 - [CyclicChainDetectorUtil](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil.md) &ndash; The CyclicChainDetectorUtil class.
     - [CyclicChainDetectorUtil::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/__construct.md) &ndash; Builds the CyclicChainDetectorUtil instance.
     - [CyclicChainDetectorUtil::setCallback](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/setCallback.md) &ndash; Sets the callback.
+    - [CyclicChainDetectorUtil::hasCyclicError](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/hasCyclicError.md) &ndash; Returns the cyclicError of this instance.
     - [CyclicChainDetectorUtil::addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependency.md) &ndash; Adds a dependency link.
     - [CyclicChainDetectorUtil::addDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependencies.md) &ndash; Adds the given dependencies as links.
     - [CyclicChainDetectorUtil::getLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/getLinks.md) &ndash; Returns the links of this instance.

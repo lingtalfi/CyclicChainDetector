@@ -27,10 +27,12 @@ class <span class="pl-k">CyclicChainDetectorUtil</span>  {
 - Properties
     - protected callable [$callback](#property-callback) ;
     - protected [Ling\CyclicChainDetector\Link[]](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md) [$links](#property-links) ;
+    - protected bool [$cyclicError](#property-cyclicError) ;
 
 - Methods
     - public [__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/__construct.md)() : void
     - public [setCallback](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/setCallback.md)(callable $callback) : void
+    - public [hasCyclicError](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/hasCyclicError.md)() : bool
     - public [addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependency.md)(string $child, string $parent) : void
     - public [addDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependencies.md)(array $dependencies) : void
     - public [getLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/getLinks.md)() : [Link](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/Link.md)
@@ -59,6 +61,12 @@ Properties
     
     
 
+- <span id="property-cyclicError"><b>cyclicError</b></span>
+
+    This property holds the cyclicError for this instance.
+    
+    
+
 
 
 Methods
@@ -66,6 +74,7 @@ Methods
 
 - [CyclicChainDetectorUtil::__construct](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/__construct.md) &ndash; Builds the CyclicChainDetectorUtil instance.
 - [CyclicChainDetectorUtil::setCallback](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/setCallback.md) &ndash; Sets the callback.
+- [CyclicChainDetectorUtil::hasCyclicError](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/hasCyclicError.md) &ndash; Returns the cyclicError of this instance.
 - [CyclicChainDetectorUtil::addDependency](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependency.md) &ndash; Adds a dependency link.
 - [CyclicChainDetectorUtil::addDependencies](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/addDependencies.md) &ndash; Adds the given dependencies as links.
 - [CyclicChainDetectorUtil::getLinks](https://github.com/lingtalfi/CyclicChainDetector/blob/master/doc/api/Ling/CyclicChainDetector/CyclicChainDetectorUtil/getLinks.md) &ndash; Returns the links of this instance.
